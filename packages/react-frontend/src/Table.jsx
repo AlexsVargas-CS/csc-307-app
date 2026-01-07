@@ -9,37 +9,37 @@ function TableHeader() {
     </thead>
   );
 }
-
-function TableBody() {
-  return (
-    <tbody>
-      <tr>
-        <td>Charlie</td>
-        <td>Janitor</td>
+function TableBody(props) {
+  const rows = props.characterData.map((row, index) => {
+    return (
+      <tr key={index}>
+        <td>{row.name}</td>
+        <td>{row.job}</td>
+        <td>
+            <button onClick={() => props.removecharacter(index)}>
+                Delete
+            </button>
+        </td>
       </tr>
-      <tr>
-        <td>Mac</td>
-        <td>Bouncer</td>
-      </tr>
-      <tr>
-        <td>Dee</td>
-        <td>Aspiring actress</td>
-      </tr>
-      <tr>
-        <td>Dennis</td>
-        <td>Bartender</td>
-      </tr>
-    </tbody>
+    );
+   }
   );
+  return (
+      <tbody>
+        {rows}
+       </tbody>
+   );
 }
 
-function Table() {
+function Table(props) {
     return (
       <table>
         <TableHeader />
-        <TableBody />
+        <TableBody 
+        characterData={props.characterData} 
+        removecharacter={props.removecharacter}
+        />
       </table>
     );
 }
-
 export default Table;

@@ -39,11 +39,23 @@ function MyApp() {
     name: "Dennis",
     job: "Bartender"
   }
+
 ]);
+
+    function removeOneCharacter(index){
+        const updated = characters.filter((characters,i) => {
+            return i != index; 
+        }
+    );
+        setCharacters(updated);
+    }
     
   return (
     <div className="container">
-      <Table characterData={characters} />
+      <Table 
+      characterData={characters} 
+      removeCharacter = {removeOneCharacter}
+      />
     </div>
   );
 }
