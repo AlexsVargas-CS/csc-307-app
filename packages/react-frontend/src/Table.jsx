@@ -16,7 +16,7 @@ function TableBody(props) {
         <td>{row.name}</td>
         <td>{row.job}</td>
         <td>
-            <button onClick={() => props.removecharacter(index)}>
+            <button onClick={() => props.removeCharacter(index)}>
                 Delete
             </button>
         </td>
@@ -24,6 +24,7 @@ function TableBody(props) {
     );
    }
   );
+  
   return (
       <tbody>
         {rows}
@@ -32,14 +33,14 @@ function TableBody(props) {
 }
 
 function Table(props) {
-    return (
-      <table>
-        <TableHeader />
-        <TableBody 
-        characterData={props.characterData} 
-        removecharacter={props.removecharacter}
-        />
-      </table>
-    );
+  return (
+    <table>
+      <TableHeader />
+      <TableBody
+        characterData={props.characterData}
+        removeCharacter={props.removeCharacter}
+      />
+    </table>
+  );
 }
 export default Table;
