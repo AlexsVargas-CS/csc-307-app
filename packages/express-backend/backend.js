@@ -77,6 +77,44 @@ app.post("/users", (req, res) => {
   res.send();
 });
 
+
+app.delete("/users/:id", (req, res) => {
+    const id = req.params.id;
+    let userToDelete = deleteUser(id);
+    if (userToDelete === undefined) {
+        res.status(404).send("Resource Not Found!");
+    } else{ 
+        res.send();
+    }
+    
+});
+
+
+const deleteUser = (id) => {
+    const index = users["users_list"].findIndex((user) => user.id === id);
+    if (index !== -1) {
+        const deletedUser = users["users_list"].splice(index, 1)[0];
+        return deletedUser;
+    }
+    return undefined;
+};
+
+
+// +const findUsersByNameAndJob = (name, job) => {
+//  45 +  return users["users_list"].filter(
+//  46 +    (user) => user["name"] === name && user["job"] === job
+//  47 +  );
+//  48 +};
+//  49 +
+
+
+
+
+
+
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
