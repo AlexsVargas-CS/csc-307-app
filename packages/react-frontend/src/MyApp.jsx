@@ -8,7 +8,7 @@ function MyApp() {
     const [characters, setCharacters] = useState([]);
     
     function updateList(person) {
-    setCharacters([...characters, person]); //Note: "..."" is an operator that unpacks an array
+    setCharacters([...characters, person]); //Note: "..."" is an operator that unpacks(nested array) an array
     //without it, we create an extra entry thats empty upon submitting! 
     }
 
