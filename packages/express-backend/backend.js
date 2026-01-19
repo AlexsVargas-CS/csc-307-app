@@ -35,16 +35,20 @@ const users = {
   ]
 };
 
-const findUserByName = (name) => {
+
+
+
+
+const findUserByNameandJob = (name) => {
   return users["users_list"].filter(
-    (user) => user["name"] === name
+    (user) => user["name"] === name && user["job"] === job
   );
 };
 
 app.get("/users", (req, res) => {
   const name = req.query.name;
   if (name != undefined) {
-    let result = findUserByName(name);
+    let result = findUserByNameandJob(name);
     result = { users_list: result };
     res.send(result);
   } else {
@@ -98,22 +102,6 @@ const deleteUser = (id) => {
     }
     return undefined;
 };
-
-
-// +const findUsersByNameAndJob = (name, job) => {
-//  45 +  return users["users_list"].filter(
-//  46 +    (user) => user["name"] === name && user["job"] === job
-//  47 +  );
-//  48 +};
-//  49 +
-
-
-
-
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
