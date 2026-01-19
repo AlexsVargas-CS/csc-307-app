@@ -5,9 +5,9 @@ const port = 8000;
 
 app.use(express.json());
 
-const findUserByName = (id) => {
-  users["users_list"].find((users) => user["id" === id]);
-};
+const findUserById = (id) =>
+  users["users_list"].find((user) => user["id"] === id);
+
 
 app.get("/users/:id", (req, res) => {
   const id = req.params["id"]; //or req.params.id
