@@ -38,8 +38,9 @@ const users = {
 };
 
 
-
-
+ const generateId = () => {
+   return Math.random().toString().substring(2);
+  };
 
 const findUserByNameandJob = (name, job) => {
   return users["users_list"].filter(
@@ -81,6 +82,8 @@ const addUser = (user) => {
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
+  userToAdd.id = generateId();
+
   const addedUser = addUser(userToAdd);
   res.status(201).send(addedUser);
 });
