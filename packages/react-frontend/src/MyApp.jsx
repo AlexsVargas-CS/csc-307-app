@@ -11,6 +11,17 @@ function MyApp() {
         const promise = fetch("http://localhost:8000/users");
         return promise;
     }
+    function postUser(person) {
+        const promise = fetch("Http://localhost:8000/users", {
+        method: "POST",
+        headers: {
+      "Content-Type": "application/json",
+        },
+        body: JSON.stringify(person),
+        });
+        return promise;
+    }
+
     useEffect(() => {
         fetchUsers()
         .then((res) => res.json())
@@ -21,9 +32,16 @@ function MyApp() {
     }, []);
     
     function updateList(person) {
-    setCharacters([...characters, person]); //Note: "..."" is an operator that unpacks(nested array) an array
-    //without it, we create an extra entry thats empty upon submitting! 
-    }
+        postUser(person)
+        .then((res) => {
+            if (res.status === 201) {
+                setCharacters([...characters, person]);
+            }
+        })
+        .catch((error) => {
+      console.log(error);
+    });
+}
 
     
 
