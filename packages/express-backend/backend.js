@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import userService from "./services/user-service.js";
 
 const app = express();
 const port = 8000;
@@ -52,13 +53,26 @@ app.get("/users", (req, res) => {
   const name = req.query.name;
   const job = req.query.job;
 
+
+  userService.findUserByNameandJob(name, job)
+  .then( (result) =>{
+    if (name != undefined && job !== undefined) {
+      
+    }
+  } )
+
+
   if (name != undefined && job !== undefined) {
     let result = findUserByNameandJob(name, job);
+
     result = { users_list: result };
     res.send(result);
   } else {
     res.send(users);
   }
+
+  
+
 });
 
 
@@ -67,12 +81,20 @@ const findUserById = (id) =>
 
 app.get("/users/:id", (req, res) => {
   const id = req.params["id"]; //or req.params.id
-  let result = findUserById(id);
-  if (result === undefined) {
-    res.status(404).send("Resource not found.");
-  } else {
-    res.send(result);
-  }
+
+  userService.findUserById(id)
+  .then(
+    (result) => { 
+      if (result) {
+        res.send(result);
+      } else 
+        {
+          res.status(404).send(`Not Found: ${id}`);
+        }
+    })
+    .catch((error) => {
+      res.status(500).send(error.name);
+    })
 });
 
 const addUser = (user) => {
